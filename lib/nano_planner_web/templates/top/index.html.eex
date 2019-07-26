@@ -1,0 +1,10 @@
+<div class="bottom-space">
+  <%= link to: Routes.plan_items_path(@conn, :index), class: "list-group-item" do %>
+    <i class="fas fa-list-ul"></i>
+    予定表
+  <% end %>
+  <%= link to: Routes.plan_items_path(@conn, :new), class: "list-group-item" do %>
+    <i class="fas fa-plus"></i>
+    予定の追加
+  <% end %>
+</div>
