@@ -11,8 +11,6 @@
 # and so on) as they will fail if something goes wrong.
 
 import NanoPlanner.Repo
-alias NanoPlanner.Repo
-alias NanoPlanner.PlanItem
 
 time0 = Timex.now("Asia/Tokyo") |> Timex.beginning_of_day()
 time1 = time0 |> Timex.beginning_of_year()
