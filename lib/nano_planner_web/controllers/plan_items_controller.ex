@@ -10,8 +10,8 @@ defmodule NanoPlannerWeb.PlanItemsController do
     plan_items =
       PlanItem
         |> order_by(desc: :starts_at, asc: :ends_at, asc: :id)
-          |> Repo.all
-            |> PlanItem.convert_datetime
+        |> Repo.all
+        |> PlanItem.convert_datetime
     render conn, "index.html", plan_items: plan_items
   end
 
@@ -19,7 +19,7 @@ defmodule NanoPlannerWeb.PlanItemsController do
     plan_item =
       PlanItem
         |> Repo.get!(params["id"])
-          |> PlanItem.convert_datetime
+        |> PlanItem.convert_datetime
     render conn, "show.html", plan_item: plan_item
   end
 
