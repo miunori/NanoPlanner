@@ -16,4 +16,14 @@ defmodule NanoPlanner.Schedule do
           ends_at: Timezone.convert(item.ends_at, time_zone)
         })
     end
+
+    def get_plan_item!(id) do
+        PlanItem
+        |> Repo.get!(id)
+        |> convert_datetime()
+    end
+
+    def build_plan_item do
+        %PlanItem{}
+    end
 end

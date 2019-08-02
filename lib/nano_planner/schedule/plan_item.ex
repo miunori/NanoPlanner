@@ -1,7 +1,7 @@
 defmodule NanoPlanner.Schedule.PlanItem do
   use Ecto.Schema
   import Ecto.Changeset
-  #alias NanoPlanner.Schedule.PlanItem
+  alias NanoPlanner.Schedule.PlanItem
 
   schema "plan_items" do
     field :name, :string

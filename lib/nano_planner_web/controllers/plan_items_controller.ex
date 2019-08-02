@@ -24,7 +24,7 @@ defmodule NanoPlannerWeb.PlanItemsController do
   end
 
   def new(conn, _params) do
-    plan_item = %PlanItem{}
+    plan_item = Schedule.build_plan_item
     changeset = Ecto.Changeset.cast(plan_item, %{}, [:name, :description, :starts_at, :ends_at])
     render conn, "new.html", changeset: changeset
   end
