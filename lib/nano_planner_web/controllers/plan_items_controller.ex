@@ -1,9 +1,9 @@
 defmodule NanoPlannerWeb.PlanItemsController do
   use NanoPlannerWeb, :controller
   import Ecto.Query
-  import Ecto.Changeset
   alias NanoPlanner.Repo
-  alias NanoPlanner.PlanItem
+  alias NanoPlanner.Schedule
+  alias NanoPlanner.Schedule.PlanItem
 
   def index(conn, _params) do
     #plan_items = Repo.all(Ecto.Query.order_by(PlanItem, asc: :starts_at))
@@ -11,7 +11,7 @@ defmodule NanoPlannerWeb.PlanItemsController do
       PlanItem
         |> order_by(desc: :starts_at, asc: :ends_at, asc: :id)
         |> Repo.all
-        |> PlanItem.convert_datetime
+        |> Schedule.convert_datetime
     render conn, "index.html", plan_items: plan_items
   end
 
@@ -19,7 +19,7 @@ defmodule NanoPlannerWeb.PlanItemsController do
     plan_item =
       PlanItem
         |> Repo.get!(params["id"])
-        |> PlanItem.convert_datetime
+        |> Schedule.convert_datetime
     render conn, "show.html", plan_item: plan_item
   end
 
@@ -27,5 +27,9 @@ defmodule NanoPlannerWeb.PlanItemsController do
     plan_item = %PlanItem{}
     changeset = Ecto.Changeset.cast(plan_item, %{}, [:name, :description, :starts_at, :ends_at])
     render conn, "new.html", changeset: changeset
+  end
+
+  def create(conn, _params) do
+    redirect(conn, to: Routes.plan_items_path(conn, :index))
   end
 end
