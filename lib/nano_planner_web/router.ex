@@ -17,12 +17,11 @@ defmodule NanoPlannerWeb.Router do
     pipe_through :browser
 
     get "/", TopController, :index
-    get "/lesson/form", LessonController, :form
-    get "/lesson/register", LessonController, :register
-    get "/plan_items", PlanItemsController, :index
-    get "/plan_items/new", PlanItemsController, :new
-    post "/plan_items", PlanItemsController, :create
-    get "/plan_items/:id", PlanItemsController, :show
+    resources(
+      "/plan_items",
+      PlanItemsController,
+        only: [:index, :new, :create, :show, :edit, :update]
+    )
   end
 
   # Other scopes may use custom stacks.
