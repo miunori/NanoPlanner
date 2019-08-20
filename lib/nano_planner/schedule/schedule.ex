@@ -1,4 +1,5 @@
 defmodule NanoPlanner.Schedule do
+    alias NanoPlanner.Repo
     alias NanoPlanner.Schedule.PlanItem
 
     def convert_datetime(items) when is_list(items) do
@@ -15,7 +16,7 @@ defmodule NanoPlanner.Schedule do
         })
     end
 
-    def get_plan_item!(id) do
+    def get_plan_item(id) do
         PlanItem
         |> Repo.get!(id)
         |> convert_datetime()
@@ -49,5 +50,11 @@ defmodule NanoPlanner.Schedule do
     item = %PlanItem{}
     cs = PlanItem.changeset(item, attrs)
     NanoPlanner.Repo.insert!(cs)
+    end
+
+    def update_plan_item(%PlanItem{} = plan_item, attrs) do
+        plan_item
+        |> PlanItem.changeset(attrs)
+        |> Repo.update!()
     end
 end

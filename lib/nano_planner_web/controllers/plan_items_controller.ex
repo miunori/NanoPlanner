@@ -23,6 +23,18 @@ defmodule NanoPlannerWeb.PlanItemsController do
     render conn, "show.html", plan_item: plan_item
   end
 
+  def edit(conn, %{"id" => id}) do
+    plan_item = Schedule.get_plan_item(id)
+    changeset = Schedule.change_plan_item(plan_item)
+    render(conn, "edit.html", plan_item: plan_item, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
+    plan_item = Schedule.get_plan_item(id)
+    Schedule.update_plan_item(plan_item, plan_item_params)
+    redirect(conn, to: Routes.plan_items_path(conn, :index))
+  end
+
   def new(conn, _params) do
     plan_item = Schedule.build_plan_item
     changeset = Schedule.change_plan_item(plan_item)
