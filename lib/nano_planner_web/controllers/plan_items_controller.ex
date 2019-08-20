@@ -29,11 +29,8 @@ defmodule NanoPlannerWeb.PlanItemsController do
     render conn, "new.html", changeset: changeset
   end
 
-  def create(conn, params) do
-    item = %Schedule.PlanItem{}
-    fields = [:name, :description, :starts_at, :ends_at]
-    cs = Ecto.Changeset.cast(item, params["plan_item"], fields)
-    NanoPlanner.Repo.insert!(cs)
+  def create(conn, %{"plan_item" => plan_item_params}) do
+    Schedule.create_plan_item(plan_item_params)
     redirect(conn, to: Routes.plan_items_path(conn, :index))
   end
 end
